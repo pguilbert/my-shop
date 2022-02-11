@@ -1,13 +1,8 @@
 import React from "react";
-import { ScrollView, View } from "react-native";
+import { Image, ScrollView, StyleSheet, View } from "react-native";
 import { Product } from "../models/Product";
-import { spacing } from "../styles";
+import { Colors, spacing } from "../styles";
 import { VSpacer } from "./Spacer";
-
-const ITEM_SIZE = 240;
-const LEFT_MARGIN = spacing(2);
-const SNAP_TO_INTERVAL = ITEM_SIZE + LEFT_MARGIN;
-const BORDER_RADIUS = 20;
 
 type FeaturedProductsProps = {
   products: Product[];
@@ -21,7 +16,6 @@ export default function FeaturedProducts({ products }: FeaturedProductsProps) {
     <ScrollView
       horizontal={true}
       overScrollMode="never"
-      snapToInterval={SNAP_TO_INTERVAL}
       showsHorizontalScrollIndicator={false}
       style={{
         flexGrow: 0,
@@ -30,23 +24,33 @@ export default function FeaturedProducts({ products }: FeaturedProductsProps) {
       }}
     >
       {products.map((p) => (
-        <Item key={p.id} />
+        <Item key={p.id} {...p} />
       ))}
       <VSpacer size={2} />
     </ScrollView>
   );
 }
 
-const Item = () => {
+const ITEM_SIZE = 200;
+const Item = (product: Product) => {
   return (
     <View
       style={{
-        marginLeft: LEFT_MARGIN,
+        marginLeft: spacing(2),
         height: ITEM_SIZE,
         width: ITEM_SIZE,
         backgroundColor: "#eee",
-        borderRadius: BORDER_RADIUS,
+        borderWidth: 1,
+        borderColor: Colors.grey.A200,
+        borderRadius: 20,
       }}
-    ></View>
+    >
+      <Image
+        style={StyleSheet.absoluteFillObject}
+        source={{
+          uri: product.imageUrl,
+        }}
+      />
+    </View>
   );
 };

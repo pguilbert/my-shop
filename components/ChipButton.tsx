@@ -1,6 +1,6 @@
 import React from "react";
 import { Pressable, StyleProp, Text, ViewStyle } from "react-native";
-import { spacing } from "../styles";
+import { Colors, spacing } from "../styles";
 
 export type ChipButtonProps = {
   style?: StyleProp<ViewStyle>;
@@ -20,8 +20,9 @@ export default function ChipButton({
       style={({ pressed }) => [
         {
           minWidth: 70,
-          backgroundColor: active || pressed ? "black" : "white",
-          borderColor: "black",
+          backgroundColor:
+            active || pressed ? Colors.primary.main : Colors.background.default,
+          borderColor: Colors.primary.main,
           borderWidth: 1,
           borderRadius: 20,
           marginBottom: spacing(2),
@@ -33,7 +34,10 @@ export default function ChipButton({
       {({ pressed }) => (
         <Text
           style={{
-            color: active || pressed ? "white" : "black",
+            color:
+              active || pressed
+                ? Colors.primary.contrastText
+                : Colors.text.primary,
             padding: spacing(1),
             textAlign: "center",
           }}

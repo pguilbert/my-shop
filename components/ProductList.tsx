@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { FlatList, Text, View } from "react-native";
+import { FlatList, Image, Text, View } from "react-native";
 import { Product, productsMocks } from "../models/Product";
-import { Colors, spacing } from "../styles";
+import { Colors, margins, spacing, Typography } from "../styles";
 import BrandFilters from "./BrandFilters";
 import FeaturedProducts from "./FeaturedProducts";
 import { HSpacer } from "./Spacer";
@@ -22,9 +22,16 @@ export default function ProductList() {
         keyExtractor={(i) => i.id}
         ListHeaderComponent={
           <>
-            <BrandFilters brands={brands} onChange={setBrandFilter} />
+            <BrandFilters
+              brands={brands}
+              onChange={setBrandFilter}
+              value={brandFilter}
+            />
             <FeaturedProducts products={featuredProducts} />
             <HSpacer size={2} />
+            <Text style={[{ color: Colors.grey.A700 }, margins.ml(2)]}>
+              {products.length} results
+            </Text>
           </>
         }
       ></FlatList>
@@ -40,29 +47,31 @@ const Item = (item: Product) => {
         flexDirection: "row",
         marginHorizontal: spacing(2),
         borderTopWidth: 1,
-        borderTopColor: Colors.grey,
+        borderTopColor: Colors.grey.A200,
         paddingVertical: spacing(1),
       }}
     >
-      <View
+      <Image
         style={{
           width: 90,
           height: 90,
           borderRadius: 5,
-
-          backgroundColor: Colors.grey,
+          backgroundColor: Colors.grey.A200,
           marginRight: spacing(1),
         }}
-      ></View>
+        source={{
+          uri: item.imageUrl,
+        }}
+      />
       <Text>
-        <ProductTitle>{item.title}</ProductTitle>
-        {"\n"}
-        <Text style={{ fontSize: 14, fontWeight: "400" }}>{item.price} €</Text>
+        <Text style={Typography.h2}>{item.title}</Text>
+        <Text
+          style={{ fontSize: 14, fontWeight: "400", color: Colors.grey.A700 }}
+        >
+          {"\n"}
+          {item.price} €
+        </Text>
       </Text>
     </View>
   );
 };
-
-const ProductTitle = ({ children }: { children: React.ReactNode }) => (
-  <Text style={{ fontSize: 18, fontWeight: "400" }}>{children}</Text>
-);

@@ -8,11 +8,13 @@ const AllLabel = "All";
 
 export type BrandFiltersProps = {
   brands: string[];
+  value: string | undefined;
   onChange: (t?: string) => void;
 };
 
 export default function BrandFilters({
   brands: brandProp,
+  value,
   onChange,
 }: BrandFiltersProps) {
   const brands = [AllLabel, ...brandProp.sort((a, b) => a.localeCompare(b))];
@@ -28,7 +30,7 @@ export default function BrandFilters({
           key={f}
           index={i}
           text={f}
-          active={i === 0}
+          active={(f === AllLabel && !value) || f === value}
           onPress={() => onChange(f === AllLabel ? undefined : f)}
         />
       ))}
