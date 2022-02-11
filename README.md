@@ -1,3 +1,3 @@
 React Native experiment 👨‍🔬
 
-![Screenshot of the app](./docs/home.png)
+<img src="./docs/home.png" alt="Screenshot of the app" width="400">
