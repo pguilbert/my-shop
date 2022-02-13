@@ -31,7 +31,7 @@ export const productsMocks: Product[] = [
     title: "ONEPLUS 9 Pro 5G",
     price: 499.99,
     brand: "ONEPLUS",
-    isFeatured: false,
+    isFeatured: true,
     imageUrl:
       "https://image01-eu.oneplus.net/ebp/202111/17/1-M00-52-02-rBpB6mGUsXCAINx6AAG65St-_x4106_1360_1360.png",
   },

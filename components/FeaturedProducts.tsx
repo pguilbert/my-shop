@@ -1,5 +1,6 @@
 import React from "react";
-import { Image, ScrollView, StyleSheet, View } from "react-native";
+import { Image, ScrollView, StyleSheet } from "react-native";
+import Animated, { FadeInUp, FadeOutUp, Layout } from "react-native-reanimated";
 import { Product } from "../models/Product";
 import { Colors, spacing } from "../styles";
 import { VSpacer } from "./Spacer";
@@ -34,7 +35,10 @@ export default function FeaturedProducts({ products }: FeaturedProductsProps) {
 const ITEM_SIZE = 200;
 const Item = (product: Product) => {
   return (
-    <View
+    <Animated.View
+      entering={FadeInUp}
+      exiting={FadeOutUp}
+      layout={Layout}
       style={{
         marginLeft: spacing(2),
         height: ITEM_SIZE,
@@ -51,6 +55,6 @@ const Item = (product: Product) => {
           uri: product.imageUrl,
         }}
       />
-    </View>
+    </Animated.View>
   );
 };
